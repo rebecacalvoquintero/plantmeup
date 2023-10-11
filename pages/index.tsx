@@ -15,7 +15,7 @@ export default function Home() {
   ] = useApiRequest<PlantResponse[]>(`https://perenual.com/api/species-list?key=${process.env.API_KEY}`, `GET`);
 
   useEffect(() => {
-    void fetchPlants();
+     fetchPlants();
   }, []);
 
   if (error) {
