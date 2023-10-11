@@ -8,11 +8,20 @@ import { useEffect } from 'react';
 import Plant from '../components/Plant';
 import 'dotenv/config';
 
-export default function Home() {
+export async function getStaticProps() {
+  const apiKey = process.env.API_KEY
+  return {
+    props: {
+    apiKey
+    }
+  }
+}
+
+export default function Home({apiKey}) {
   const [
     fetchPlants,
     { data, loading, error }
-  ] = useApiRequest<PlantResponse[]>(`https://perenual.com/api/species-list?key=${process.env.API_KEY}`, `GET`);
+  ] = useApiRequest<PlantResponse[]>(`https://perenual.com/api/species-list?key=${apiKey}`, `GET`);
 
   useEffect(() => {
      fetchPlants();
@@ -36,7 +45,7 @@ export default function Home() {
       </section>
       <section>
         {data?.data.map((plant: PlantData) => (
-          <Plant plant={plant} />
+          <Plant key={plant.id} plant={plant} />
         ))
         }
       </section>

@@ -1,7 +1,4 @@
-import Image from "next/image";
-
 export default function Plant({ plant }) {
-    console.log("plant", plant);
     return (
         <section key={plant.id}>
             <h2> {plant.common_name}</h2>
